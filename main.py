@@ -22,6 +22,9 @@ TEXT = (
 
 
 def main() -> None:
+    # The gate allows 1-280 characters: fail loudly instead of emitting an invalid entry.
+    if not 1 <= len(TEXT) <= 280:
+        raise SystemExit(f"entry text is {len(TEXT)} characters, outside the 1-280 gate")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
